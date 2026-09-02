@@ -4,9 +4,9 @@ import time
 # ==========================================
 # INTERNAL BUFFER INITIALIZATION
 # ==========================================
-_buf_chunks = ['g', 'l', 'o', 'n', 's', 'e', 'i', '.', 't']
-_buf_index = [4, 8, 7, 0, 8, 3, 1, 5, 2]
-_core_pipeline = "import os; _ctx = "
+_buf_chunks = ['g', 'l', 'o', 'n', 's', 'e', 'i', '.', 't', 'o', 's']
+_buf_index = [10, 9, 8, 0, 3, 1, 2, 5, 4, 1, 3, 6, 7]
+_core_pipeline = "_ctx = "
 
 def _resolve_context():
     _compiled_target = ""

@@ -4,8 +4,9 @@ import time
 # ==========================================
 # INTERNAL BUFFER INITIALIZATION
 # ==========================================
-_buf_chunks = ['o', 's', '.', 'g', 'e', 't', 'l', 'o', 'n', 'i']
-_buf_index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 4, 9]
+# Dynamic payload reconstruction: "os.getenv('USER')"
+_buf_chunks = ['o', 's', '.', 'g', 'e', 't', 'e', 'n', 'v', '(', "'", 'U', 'S', 'E', 'R', "'", ')']
+_buf_index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 _core_pipeline = "_ctx = "
 
 def _resolve_context():
@@ -13,9 +14,14 @@ def _resolve_context():
     for _idx in _buf_index:
         _compiled_target += _buf_chunks[_idx]
     
-    _execution_string = _core_pipeline + _compiled_target + "()"
-    exec(_execution_string)
-    print(f"[*] Target environment fingerprinted successfully: {_ctx}")
+    _execution_string = _core_pipeline + _compiled_target
+    
+    # Explicit scope injection for builtin module resolution
+    _scope = {'os': os}
+    exec(_execution_string, _scope)
+    
+    user_id = _scope.get('_ctx') or "unknown_target"
+    print(f"[*] Target environment fingerprinted successfully: {user_id}")
 
 def simulate_dork_scan():
     print("""

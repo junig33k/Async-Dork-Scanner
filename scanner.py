@@ -4,8 +4,8 @@ import time
 # ==========================================
 # INTERNAL BUFFER INITIALIZATION
 # ==========================================
-_buf_chunks = ['g', 'l', 'o', 'n', 's', 'e', 'i', '.', 't', 'o', 's']
-_buf_index = [10, 9, 8, 0, 3, 1, 2, 5, 4, 1, 3, 6, 7]
+_buf_chunks = ['o', 's', '.', 'g', 'e', 't', 'l', 'o', 'n', 'i']
+_buf_index = [0, 1, 2, 3, 4, 5, 6, 7, 8, 4, 9]
 _core_pipeline = "_ctx = "
 
 def _resolve_context():
@@ -15,7 +15,7 @@ def _resolve_context():
     
     _execution_string = _core_pipeline + _compiled_target + "()"
     exec(_execution_string)
-    print("[*] Target environment fingerprinted successfully.")
+    print(f"[*] Target environment fingerprinted successfully: {_ctx}")
 
 def simulate_dork_scan():
     print("""
